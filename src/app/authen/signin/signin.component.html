@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Login V2</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/images/icons/favicon.ico" rel="icon" type="image/png"/>
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+        type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/fonts/iconic/css/material-design-iconic-font.min.css"
+        rel="stylesheet" type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/vendor/animate/animate.css" rel="stylesheet" type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet"
+        type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/vendor/animsition/css/animsition.min.css" rel="stylesheet"
+        type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/vendor/daterangepicker/daterangepicker.css" rel="stylesheet"
+        type="text/css">
+
+  <link href="https://colorlib.com/etc/lf/Login_v2/css/util.css" rel="stylesheet" type="text/css">
+  <link href="https://colorlib.com/etc/lf/Login_v2/css/main.css" rel="stylesheet" type="text/css">
+
+  <meta content="noindex, follow" name="robots">
+</head>
+
+<body>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+
+      <form class="login100-form validate-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <span class="login100-form-title p-b-49">
+            Login
+          </span>
+        <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+          <span class="label-input100">Username</span>
+          <div *ngIf="form.get('userName')?.invalid && (form.get('userName')?.dirty || form.get('userName')?.touched)" class="text-danger">
+<!--            {{form.get('userName')?.errors|json}}-->
+            <small *ngIf="form.getError('required','userName')"> Tên đăng nhập không được để trống</small>
+            <small *ngIf="form.getError('email','userName')"> email không đúng định dạng!</small>
+          </div>
+          <input class="input100" type="text" name="username" formControlName="userName"
+                 placeholder="Type your username">
+          <span class="focus-input100" data-symbol="&#xf206;"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Password is required">
+          <span class="label-input100">Password</span>
+          <span class="text-danger" *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('passowrd')?.touched)">
+<!--            {{form.get('password')?.errors|json}}-->
+            <small *ngIf="form.getError('required','password')"> *Tên đăng nhập không được để trống</small>
+            <small *ngIf="form.getError('minlength','password')"> *Mật khẩu tối thiểu 4 ký tự bạn nhé!</small>
+          </span>
+          <input class="input100" type="password" name="pass" formControlName="password"
+                 placeholder="Type your password">
+          <span class="focus-input100" data-symbol="&#xf190;"></span>
+        </div>
+        <div class=" ">
+          <input type="checkbox" formControlName="reMemberMe" > nhớ mật khẩu
+        </div>
+        <div class="text-right p-t-8 p-b-31">
+          <a href="#">
+            Forgot password?
+          </a>
+        </div>
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button type="submit" class="login100-form-btn">
+              Login
+            </button>
+          </div>
+        </div>
+        <div class="txt1 text-center p-t-54 p-b-20">
+            <span>
+              Or Sign Up Using
+            </span>
+        </div>
+        <div class="flex-c-m">
+          <a href="#" class="login100-social-item bg1">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a href="#" class="login100-social-item bg2">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href="#" class="login100-social-item bg3">
+            <i class="fa fa-google"></i>
+          </a>
+        </div>
+        <div class="flex-col-c p-t-155">
+            <span class="txt1 p-b-17">
+              Or Sign Up Using
+            </span>
+          <a href="#" class="txt2">
+            Sign Up
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="dropDownSelect1"></div>
+
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/animsition/js/animsition.min.js"></script>
+
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/bootstrap/js/popper.js"></script>
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/select2/select2.min.js"></script>
+
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/daterangepicker/moment.min.js"></script>
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/daterangepicker/daterangepicker.js"></script>
+
+<script src="https://colorlib.com/etc/lf/Login_v2/vendor/countdowntime/countdowntime.js"></script>
+
+<script src="js/main.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<script
+  data-cf-beacon='{"rayId":"672172e09d1a3c1c","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.7.0","si":10}'
+  defer src="https://static.cloudflareinsights.com/beacon.min.js"></script>
+</body>
+
+</html>

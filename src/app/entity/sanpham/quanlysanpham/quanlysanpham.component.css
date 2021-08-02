@@ -1,0 +1,30 @@
+.select-col {
+  width: 0px !important;
+  background-color: red;
+  max-width: 10px;
+}
+
+input[type='checkbox'] {
+  /*height: 20px;*/
+  /*padding: 20px;*/
+}
+
+/*td> button{*/
+/*  float: right;*/
+/*  padding: 0px;*/
+/*!*border: 2px;*!*/
+
+/*}*/
+td > label {
+  padding: 10%;
+  position: relative;
+  /*background-color: red;*/
+  display: block;
+  height: 100%;
+
+}
+.btn-new{
+  padding: 2px;
+  width: 60px;
+
+}

@@ -1,0 +1,117 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Thêm mới bằng file Excel</h4>
+  <button type="button" class="close" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true"><i class="material-icons">close</i></span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="onsubmitform()">
+    <div class="row">
+      <div class="col-4">
+
+        <div class="card border-secondary mb-5">
+          <img alt=""
+               [src]="product?.image ?  'http://localhost:8099/img/'+product?.image : 'https://www.playzone.vn/image/cache/no_image-100x100.png' "
+               id="image" class="rounded img-fluid img-thumbnail shadow-5-strong">
+
+          <div class=" form-group">
+          </div>
+
+          <label>File Image</label>
+          <input type="file" class="form-control" id="avatars" name="imagefile" accept="image/*"
+                 (change)="choosefile($event?.target)"
+          > <small id="avatar_error"
+                   class="form-text text-danger"></small>
+
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <label class="form-label"> Product Name</label> <span class="text-danger">*</span>
+            <input class="form-control" type="text" formControlName="nameProduct" placeholder="product Name.....">
+            <span class="text-danger"
+                  *ngIf="form.get('nameProduct')?.invalid && (form.get('nameProduct')?.dirty || form.get('nameProduct')?.touched)">
+            {{form.get('nameProduct')?.errors|json}}
+              <small *ngIf="form.getError('required','nameProduct')"> *Tên sản phẩm không được để trống! </small>
+            <small *ngIf="form.getError('minlength','nameProduct')"> *Tên sản phẩm phải nhiều hơn 5 ký tự!</small>
+          </span>
+          </div>
+          <div class="col">
+            <label>Price</label> <span class="text-danger">*</span>
+            <input class="form-control" type="number" formControlName="realPrice" min="0" value="0">
+            <span class="text-danger"
+                  *ngIf="form.get('realPrice')?.invalid && (form.get('realPrice')?.dirty || form.get('realPrice')?.touched)">
+            {{form.get('realPrice')?.errors|json}}
+              <small *ngIf="form.getError('required','realPrice')"> * Giá sẩn phẩm không được để trống! </small>
+            <small *ngIf="form.getError('min','realPrice')"> * Giá sản phảm tối thiểu là 0!</small>
+          </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label"> Quantity</label><span class="text-danger">*</span>
+            <input class="form-control" formControlName="quantity" type="number" min="0" >
+            <span class="text-danger"
+                  *ngIf="form.get('quantity')?.invalid && (form.get('quantity')?.dirty || form.get('quantity')?.touched)">
+            {{form.get('quantity')?.errors|json}}
+              <small *ngIf="form.getError('required','quantity')"> * Số lượng sản phẩm không được để trống! </small>
+              <small *ngIf="form.getError('min','quantity')"> * Giá sản phảm tối thiểu là 0!</small>
+            </span>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label"> Discount (%)</label>
+              <input formControlName="discount" class="form-control" type="number" min="0" max="100"
+                     placeholder="Discount....">
+              <span class="text-danger"
+                    *ngIf="form.get('discount')?.invalid && (form.get('discount')?.dirty || form.get('discount')?.touched)">
+            {{form.get('quantity')?.errors|json}}
+                <small *ngIf="form.getError('min','discount')"> * Giá sản phảm tối thiểu là 0!</small>
+                <small *ngIf="form.getError('max','discount')"> * Giá sản phảm tối thiểu là 0!</small>
+          </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label>Trạng thái sản phẩm</label>
+            <select formControlName="status" class="form-select">
+              <option value="1" selected>bật</option>
+              <option value="2">tắt</option>
+              <option value="3">hết hàng</option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label> Category</label>
+              <select formControlName="category" value="category" class="form-select">
+                <option value="null">Khác</option>
+                <option value=2>cate 1</option>
+                <option value=1>cate 4</option>
+                <option value="3">cate 2</option>
+                <option value="1">cate 3</option>
+                <option value="5">cate 3</option>
+                <option value="6">cate 3</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"> Description</label>
+            <input class="form-control" formControlName="description" type="text" placeholder="Description....">
+            <span class="text-danger"
+                  *ngIf="form.get('description')?.invalid && (form.get('description')?.dirty || form.get('description')?.touched)">
+            {{form.get('quantity')?.errors|json}}
+              <small *ngIf="form.getError('minLength','description')"> * Mô tả sản phẩm tối thiểu 5 ký tự!!</small>
+
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group d-flex justify-content-end modal-footer ">
+      <button type="submit" class="btn btn-primary " [disabled]="!form.valid"> sumit form</button>
+      <button type="button" (click)="cancel()" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+    </div>
+  </form>
+</div>
