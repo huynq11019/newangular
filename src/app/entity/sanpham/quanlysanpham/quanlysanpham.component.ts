@@ -20,7 +20,7 @@ export class QuanlysanphamComponent implements OnInit {
   private fristSort = true;
   private modalRef: any;
   // @ViewChild('myModal') myModal: any;
-  curentProduct: any;
+  private initProduct: Product = {discount: 0, quantity: 0, realPrice: 0, status: 1};
 
   // public newMomentObj = this.moment(job.createdAt, 'DD-MM-YYYY');
 
@@ -78,9 +78,17 @@ export class QuanlysanphamComponent implements OnInit {
     this.fristSort = !this.fristSort;
   }
 
-  openModal(item: any): void {
+  openNew(): void {
+    this.openModal(this.initProduct, true
+    );
+  }
+
+  openEdit(item: Product): void {
+    this.openModal(item, false);
+  }
+
+  openModal(item: any, isCreate: boolean): void {
     // console.log(item);
-    this.curentProduct = item;
     const modelDep = this.modelService.open(ProductFormComponent, {
       size: 'xl',
       // modalClass: 'Create Product',
@@ -94,9 +102,14 @@ export class QuanlysanphamComponent implements OnInit {
     });
     modelDep.componentInstance.product = item;
     modelDep.componentInstance.onSUbmitForm.subscribe(async (rs: Product) => {
-      console.log('đang loading ', rs);
       this.spiner.show();
-      await this.submitForm(rs);
+      if (isCreate) {
+        console.log('đang loading ', rs);
+        await this.submitForm(rs);
+
+      } else {
+        console.log('update sản phẩm');
+      }
       this.spiner.hide();
     });
   }
@@ -105,9 +118,13 @@ export class QuanlysanphamComponent implements OnInit {
     this.productService.createProdc(data)
       .subscribe((res) => {
           console.log(res);
+          this.toasr.success('Product has created!', res.statusText);
           this.loadAllProduct();
         },
-        error => console.log(error),
+        error => {
+          console.log(error);
+          this.toasr.error('tạo sản phẩm không thành công', error.statusText);
+        },
         () => console.log('hoàn thành'));
   }
 

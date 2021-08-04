@@ -32,7 +32,7 @@
             <input class="form-control" type="text" formControlName="nameProduct" placeholder="product Name.....">
             <span class="text-danger"
                   *ngIf="form.get('nameProduct')?.invalid && (form.get('nameProduct')?.dirty || form.get('nameProduct')?.touched)">
-            {{form.get('nameProduct')?.errors|json}}
+<!--            {{form.get('nameProduct')?.errors|json}}-->
               <small *ngIf="form.getError('required','nameProduct')"> *Tên sản phẩm không được để trống! </small>
             <small *ngIf="form.getError('minlength','nameProduct')"> *Tên sản phẩm phải nhiều hơn 5 ký tự!</small>
           </span>
@@ -42,7 +42,7 @@
             <input class="form-control" type="number" formControlName="realPrice" min="0" value="0">
             <span class="text-danger"
                   *ngIf="form.get('realPrice')?.invalid && (form.get('realPrice')?.dirty || form.get('realPrice')?.touched)">
-            {{form.get('realPrice')?.errors|json}}
+<!--            {{form.get('realPrice')?.errors|json}}-->
               <small *ngIf="form.getError('required','realPrice')"> * Giá sẩn phẩm không được để trống! </small>
             <small *ngIf="form.getError('min','realPrice')"> * Giá sản phảm tối thiểu là 0!</small>
           </span>
@@ -51,24 +51,23 @@
         <div class="row">
           <div class="col-md-6">
             <label class="form-label"> Quantity</label><span class="text-danger">*</span>
-            <input class="form-control" formControlName="quantity" type="number" min="0" >
-            <span class="text-danger"
-                  *ngIf="form.get('quantity')?.invalid && (form.get('quantity')?.dirty || form.get('quantity')?.touched)">
-            {{form.get('quantity')?.errors|json}}
+            <input class="form-control" formControlName="quantity" type="number" min="0">
+            <div class="text-danger"
+                 *ngIf="form.get('quantity')?.invalid && (form.get('quantity')?.dirty || form.get('quantity')?.touched)">
+<!--              {{form.get('quantity')?.errors|json}}-->
               <small *ngIf="form.getError('required','quantity')"> * Số lượng sản phẩm không được để trống! </small>
               <small *ngIf="form.getError('min','quantity')"> * Giá sản phảm tối thiểu là 0!</small>
-            </span>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label class="form-label"> Discount (%)</label>
               <input formControlName="discount" class="form-control" type="number" min="0" max="100"
                      placeholder="Discount....">
-              <span class="text-danger"
-                    *ngIf="form.get('discount')?.invalid && (form.get('discount')?.dirty || form.get('discount')?.touched)">
-            {{form.get('quantity')?.errors|json}}
-                <small *ngIf="form.getError('min','discount')"> * Giá sản phảm tối thiểu là 0!</small>
-                <small *ngIf="form.getError('max','discount')"> * Giá sản phảm tối thiểu là 0!</small>
+              <span class="text-danger" *ngIf="form.get('discount')?.invalid && (form.get('discount')?.dirty || form.get('discount')?.touched)">
+<!--                {{form.get('quantity')?.errors|json}}-->
+                <small *ngIf="form.getError('min','discount')"> * Giá sản phảm tối thiểu là 0%!</small>
+                <small *ngIf="form.getError('max','discount')"> * Giảm giá tối đa là 100%!</small>
           </span>
             </div>
           </div>
@@ -87,24 +86,20 @@
               <label> Category</label>
               <select formControlName="category" value="category" class="form-select">
                 <option value="null">Khác</option>
-                <option value=2>cate 1</option>
-                <option value=1>cate 4</option>
-                <option value="3">cate 2</option>
-                <option value="1">cate 3</option>
-                <option value="5">cate 3</option>
-                <option value="6">cate 3</option>
+                <option *ngFor="let cate of categories "  [value]="cate?.id">{{cate?.name}}</option>
               </select>
             </div>
           </div>
           <div class="form-group">
             <label class="form-label"> Description</label>
             <input class="form-control" formControlName="description" type="text" placeholder="Description....">
-            <span class="text-danger"
+            <div class="text-danger"
                   *ngIf="form.get('description')?.invalid && (form.get('description')?.dirty || form.get('description')?.touched)">
-            {{form.get('quantity')?.errors|json}}
-              <small *ngIf="form.getError('minLength','description')"> * Mô tả sản phẩm tối thiểu 5 ký tự!!</small>
 
-          </span>
+              <small *ngIf="form.getError('minlength','description')"> * Mô tả sản phẩm tối thiểu 5 ký tự!!</small>
+              <small *ngIf="form.getError('required','description')"> * Mô tả sản phẩm không được để trống!!</small>
+<!--              {{form.get('description')?.errors|json}}-->
+          </div>
           </div>
         </div>
       </div>

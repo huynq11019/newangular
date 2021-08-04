@@ -24,6 +24,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MomentModule} from 'ngx-moment';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ConfirmModalComponent } from './core/component/confirm-modal/confirm-modal.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+
+registerLocaleData(en);
 // import {ModalModule} from 'ngb-modal';
 // import {MatButtonModule} from '@angular/material/button';
 // import {MatButtonModule} from '@angular/material/button';
@@ -58,11 +67,14 @@ import { ConfirmModalComponent } from './core/component/confirm-modal/confirm-mo
     NgbModule,
     MomentModule,
     MatProgressBarModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
 
     // MatIconModule
 
   ],
-  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}, FormBuilder],
+  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}, FormBuilder, { provide: NZ_I18N, useValue: en_US }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

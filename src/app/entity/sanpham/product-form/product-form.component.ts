@@ -3,23 +3,32 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Product} from '../../../core/model/Product';
+import {CategoriesService} from '../../../service/categories.service';
+import {UploadfileServiceService} from '../../../service/uploadfile-service.service';
 // import {EventEmitter} from 'events';
-
+// import {S} from 'ng2-file-uploader/ng2-file-uploader';
 declare var $: any;
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
+
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
   @Input() product?: Product;
   @Output() onSUbmitForm = new EventEmitter();
   public form: any;
+  public categories: any;
+  private queryParam: any;
+
+  // public formData?: FormGroup;
 
   constructor(private fb: FormBuilder,
               private spiner: NgxSpinnerService,
-              private activeForm: NgbActiveModal
+              private activeForm: NgbActiveModal,
+              private cateService: CategoriesService,
+              private uploadFile: UploadfileServiceService
   ) {
   }
 
@@ -27,23 +36,45 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.product);
     this.form = this.fb.group({
-      nameProduct: [this.product?.nameProduct, [Validators.required, Validators.minLength(5)]],
-      description: [this.product?.description, [Validators.required, Validators.minLength(4)]],
-      realPrice: [this.product?.realPrice, [Validators.required, Validators.min(0)]],
-      discount: [this.product?.discount, [Validators.min(0), Validators.max(100)]],
-      category: [this.product?.category],
-      status: [this.product?.status],
-      quantity: [this.product?.quantity, [Validators.min(0)]],
-      image: [this.product?.image]
+        nameProduct: [this.product?.nameProduct, [Validators.required, Validators.minLength(5)]],
+        description: [this.product?.description, [Validators.required, Validators.minLength(10)]],
+        realPrice: [this.product?.realPrice, [Validators.required, Validators.min(0)]],
+        discount: [this.product?.discount, [Validators.min(0), Validators.max(100)]],
+        category: [this.product?.category],
+        status: [this.product?.status],
+        quantity: [this.product?.quantity, [Validators.min(0)]],
+        image: [this.product?.image]
 
-    });
+      }
+    );
+
+    this.cateService.getListCategories(this.queryParam)
+      .subscribe(res => {
+          console.log(res);
+          this.categories = res.body;
+        },
+        error => console.error(error),
+        () => {
+          console.log('đã hoàn thành đăng ký');
+        }
+      );
   }
 
 
   choosefile(fileinput: any): void {
-    // console.log(fileinput);
+    console.log(fileinput.files[0]);
+
     if (fileinput.files && fileinput.files[0]) {
-      console.log('lại là chao đay', fileinput?.files);
+      const formDatax = new FormData();
+      formDatax.append('uploadFile', fileinput.files[0]);
+      this.uploadFile.loadFile(formDatax).subscribe(
+        respon => {
+          console.log(respon);
+        },
+        erro => {
+          console.error(erro);
+        });
+      console.log('lại là chao đay', fileinput?.files[0]);
       const reader = new FileReader();
       reader.onload = (e) => {
         $('#image').attr('src', e?.target?.result);
@@ -62,5 +93,7 @@ export class ProductFormComponent implements OnInit {
     console.log(this.form.valid);
     // onsubmit(this.form.valueOf())
     this.onSUbmitForm.emit(this.form.value);
+
+    this.activeForm.close();
   }
 }

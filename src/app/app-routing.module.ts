@@ -1,12 +1,11 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {Page404Component} from './authen/page404/page404.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {Page500Component} from './authen/page500/page500.component';
-import {MainLayoutComponent} from './layout/app-layout/main-layout/main-layout.component';
+import {Page404Component} from './authen/page404/page404.component';
 import {AuthLayoutComponent} from './layout/app-layout/auth-layout/auth-layout.component';
 import {ReportComponent} from './entity/report/report.component';
 import {AuthenicatedGuard} from './core/interceptor/authenicated.guard';
-
+import {MainLayoutComponent} from './layout/app-layout/main-layout/main-layout.component';
 
 const routes: Routes = [
   {// đây là main layout
@@ -48,12 +47,12 @@ const routes: Routes = [
   {
     path: 'page500',
     component: Page500Component
-  }
+  },
+  { path: 'fnckshit', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }
