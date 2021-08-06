@@ -3,7 +3,8 @@ export const LOCAL_STORAGE = {
   URL_AUTHORIZATION_CODE: 'url-code',
   CHECK_LOGOUT_MS: 'check-logout-ms',
   URL: 'url',
-  CODE: 'code'
+  CODE: 'code',
+  ROLE: 'roke'
 };
 export const SESSION_STORAGE = {
   JWT_TOKEN: 'jwt-token',

@@ -3,7 +3,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import {Page404Component} from './authen/page404/page404.component';
@@ -20,7 +20,7 @@ import {AccountComponent} from './entity/account/account/account.component';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthService} from './service/auth.service';
 import {InterceptorInterceptor} from './core/interceptor/interceptor.interceptor';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownMenu, NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MomentModule} from 'ngx-moment';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ConfirmModalComponent } from './core/component/confirm-modal/confirm-modal.component';
@@ -31,12 +31,16 @@ import en from '@angular/common/locales/en';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 registerLocaleData(en);
 // import {ModalModule} from 'ngb-modal';
 // import {MatButtonModule} from '@angular/material/button';
 // import {MatButtonModule} from '@angular/material/button';
-
+// import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import {MatIconModule} from '@angular/material/icon';
+import {NzPipesModule} from 'ng-zorro-antd/pipes';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,8 +74,12 @@ registerLocaleData(en);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
+    // NzPaginationModule
+    // NzPopoverModule
+    //
+    MatIconModule,
+    NzPipesModule,
 
-    // MatIconModule
 
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}, FormBuilder, { provide: NZ_I18N, useValue: en_US }],

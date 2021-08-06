@@ -36,6 +36,7 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.product);
     this.form = this.fb.group({
+        id: [this.product?.id],
         nameProduct: [this.product?.nameProduct, [Validators.required, Validators.minLength(5)]],
         description: [this.product?.description, [Validators.required, Validators.minLength(10)]],
         realPrice: [this.product?.realPrice, [Validators.required, Validators.min(0)]],
@@ -69,7 +70,9 @@ export class ProductFormComponent implements OnInit {
       formDatax.append('uploadFile', fileinput.files[0]);
       this.uploadFile.loadFile(formDatax).subscribe(
         respon => {
-          console.log(respon);
+          console.log(respon.body.fileName);
+          console.log(this.form.value);
+          this.form.value.image = respon.body.fileName ?? 'https://www.playzone.vn/image/cache/no_image-100x100.png';
         },
         erro => {
           console.error(erro);
@@ -92,6 +95,9 @@ export class ProductFormComponent implements OnInit {
     // console.log(this.form);
     console.log(this.form.valid);
     // onsubmit(this.form.valueOf())
+    // if(this.form.value.image === this.product?.image){
+    //
+    // }
     this.onSUbmitForm.emit(this.form.value);
 
     this.activeForm.close();

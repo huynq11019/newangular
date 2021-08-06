@@ -7,7 +7,6 @@ import {productApi} from '../core/constans/common';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
 import {Product} from '../core/model/Product';
-import {catchError, retry} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +20,9 @@ export class ProductService {
   }
 
   getistProduct(param?: any): Observable<any> {
+    if(param.page > 0){
+      param.page = param.page - 1;
+    }
     const newParam = new HttpParams({fromObject: param});
     console.log(param);
     console.log(newParam);
@@ -40,6 +42,10 @@ export class ProductService {
 
   removeProduct(idProduct?: number): Observable<any> {
     return this.http.delete(productApi.deleteProduct + idProduct, {observe: 'response'});
+  }
+
+  updateProduct(product?: Product): Observable<any> {
+    return this.http.put(productApi.updateProduct + product?.id, product, {observe: 'response'});
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -64,4 +70,6 @@ export class ProductService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
+
 }

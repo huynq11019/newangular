@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {Page500Component} from './authen/page500/page500.component';
 import {Page404Component} from './authen/page404/page404.component';
 import {AuthLayoutComponent} from './layout/app-layout/auth-layout/auth-layout.component';
@@ -39,6 +39,9 @@ const routes: Routes = [
       path: '',
       loadChildren: () => import('./authen/authen.module').then((m) => m.AuthenModule)
     }]
+  }, {
+    path: 'fnckshit',
+    loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)
   }
   , {
     path: '**',
@@ -48,11 +51,12 @@ const routes: Routes = [
     path: 'page500',
     component: Page500Component
   },
-  { path: 'fnckshit', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

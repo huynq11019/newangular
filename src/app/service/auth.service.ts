@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Observable, of, Subject, throwError} from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
 import {ToastrService} from 'ngx-toastr';
@@ -45,12 +45,13 @@ export class AuthService {
   private authenticateSuccess(remenberMe: any, resp: any): void {
     const jwt = resp?.idToken;
     const email = resp?.name;
+    const role = resp?.role;
     const tokenType = resp?.tokenType;
     console.log(remenberMe);
     console.log(resp);
     this.authenticated = true;
     this.coookie.set(COOKIES.REFRESH_TOKEN, jwt, {path: '/'});
-    this.storeAuthenticationToken(jwt, remenberMe);
+    this.storeAuthenticationToken(jwt, role, remenberMe);
     this.getUserTokenFormJwt(jwt);
     // chuyển hướng trang
     this.router.navigate(['/']);
@@ -59,17 +60,23 @@ export class AuthService {
   }
 
 
-  storeAuthenticationToken(jwt: string, rememberMe: boolean): void {
+  storeAuthenticationToken(jwt: string, role: string[], rememberMe: boolean): void {
     if (rememberMe) {
       this.$localSorge.store(LOCAL_STORAGE.JWT_TOKEN, jwt);
+      this.$localSorge.store(LOCAL_STORAGE.ROLE, role);
     } else {
       this.$session.store(SESSION_STORAGE.JWT_TOKEN, jwt);
+      this.$session.store(LOCAL_STORAGE.ROLE, role);
     }
   }
 
+  loadAllUser(param: any): Observable<any> {
+    const newParam = new HttpParams({fromObject: param});
+    return this.http.get(authAPi.getAll, {params: newParam});
+  }
 
   isAuthenticae(): boolean {
-
+    const jwt = this.$localSorge.retrieve(LOCAL_STORAGE.JWT_TOKEN) || this.$session.retrieve(LOCAL_STORAGE.JWT_TOKEN);
     return this.authenticated;
   }
 

@@ -8,6 +8,7 @@ import {ProductFormComponent} from '../product-form/product-form.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Product} from '../../../core/model/Product';
 import {ConfirmModalComponent} from '../../../core/component/confirm-modal/confirm-modal.component';
+import {NzButtonSize} from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-quanlysanpham',
@@ -15,10 +16,18 @@ import {ConfirmModalComponent} from '../../../core/component/confirm-modal/confi
   styleUrls: ['./quanlysanpham.component.css']
 })
 export class QuanlysanphamComponent implements OnInit {
-  public param?: any;
+  public param = {
+    page: 0,
+    limit: 5,
+    keywoord: '',
+    order: 'DESC',
+    orderBy: 'id'
+  };
   public sanphamPage?: any;
   private fristSort = true;
   private modalRef: any;
+  size: NzButtonSize = 'large';
+  public totalElement?: number;
   // @ViewChild('myModal') myModal: any;
   private initProduct: Product = {discount: 0, quantity: 0, realPrice: 0, status: 1};
 
@@ -37,11 +46,12 @@ export class QuanlysanphamComponent implements OnInit {
   }
 
   loadAllProduct(): void {
-    this.param = {...this.param, limit: 10};
+    console.log(this.param);
     this.spiner.show();
     this.productService.getistProduct(this.param)
       .subscribe(resp => {
           this.sanphamPage = resp.body;
+
           console.log(resp);
         }
         ,
@@ -57,6 +67,8 @@ export class QuanlysanphamComponent implements OnInit {
         ,
         () => {
           this.spiner.hide();
+          this.totalElement = this.sanphamPage?.totalElement;
+          console.log(this.sanphamPage?.totalElement);
           console.log('thành công');
         });
   }
@@ -108,7 +120,8 @@ export class QuanlysanphamComponent implements OnInit {
         await this.submitForm(rs);
 
       } else {
-        console.log('update sản phẩm');
+        console.log('update sản phẩm', rs);
+        this.upDatePRoduct(rs);
       }
       this.spiner.hide();
     });
@@ -126,6 +139,18 @@ export class QuanlysanphamComponent implements OnInit {
           this.toasr.error('tạo sản phẩm không thành công', error.statusText);
         },
         () => console.log('hoàn thành'));
+  }
+
+  upDatePRoduct(data: Product): void {
+    this.productService.updateProduct(data).subscribe(respon => {
+        console.log((respon));
+        this.loadAllProduct();
+        this.toasr.success('cập nhận sản phẩm thành công', '200');
+      },
+      error => {
+        console.log(error);
+        this.toasr.error('cập nhật không thành công ', error.error.status);
+      });
   }
 
   onRemveProduct(idProduct: number): void {
@@ -152,6 +177,7 @@ export class QuanlysanphamComponent implements OnInit {
           res => {
             console.log(res);
             this.toasr.success('đã xóa thàng công', res.status);
+            this.loadAllProduct();
           },
           error => {
             console.log(error);
@@ -167,4 +193,15 @@ export class QuanlysanphamComponent implements OnInit {
     });
   }
 
+  changePage(event: any): void {
+    this.param = {...this.param, page: event};
+
+    this.loadAllProduct();
+  }
+
+  changeSize(event: any): void {
+    this.param = {...this.param, limit: event};
+
+    this.loadAllProduct();
+  }
 }

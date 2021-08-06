@@ -1,16 +1,23 @@
-
 <div class="card mb-4">
   <div class="row">
     <div class="col-3  pe-5"></div>
     <div class="d-flex justify-content-end col-9">
-      <button class="btn btn-outline-success me-2 btn-new "  (click)="openNew()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-      </svg></button>
-      <button class="btn btn-outline-danger me-2 btn-new"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-      </svg></button>
+      <!--      <button class="btn btn-outline-success me-2 btn-new "  (click)="openNew()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">-->
+      <!--        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>-->
+      <!--        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>-->
+      <!--      </svg></button>-->
+      <nz-button-group [nzSize]="size">
+        <button nz-button nzType="primary" nz-popover nzType="primary" nzPopoverContent="Tạo Sản phẩm"
+                nzPopoverPlacement="bottomLeft" (click)="openNew()">
+          <!--          <i nz-icon nzType="cloud"></i>-->
+          <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+        </button>
+        <button nz-button nzType="danger" nz-popover nzPopoverContent="xóa sản phẩm" nzPopoverPlacement="bottomRight">
+          <!--          <i nz-icon nzType="cloud"></i>-->
+          <!--        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>-->
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </button>
+      </nz-button-group>
     </div>
   </div>
   <div class="card-body px-0 pt-0 pb-2">
@@ -51,7 +58,7 @@
         <tr *ngFor="let item of sanphamPage?.content, index as i">
           <td class="p-0">
             <label class="ms-0 ps-3">
-              <input type="checkbox" class="" >
+              <input type="checkbox" class="">
 
             </label>
           </td>
@@ -60,7 +67,7 @@
             <div class="d-flex px-2">
               <div>
                 <img
-                  [src]="item?.image ?  'http://localhost:8099/img/'+item?.image : 'https://www.playzone.vn/image/cache/no_image-100x100.png' "
+                  [src]="item?.image ?  'http://localhost:8099/api/file/img/'+item?.image : 'https://www.playzone.vn/image/cache/no_image-100x100.png' "
                   class="avatar avatar-sm rounded-circle me-2">
               </div>
               <div class="my-auto">
@@ -85,15 +92,15 @@
           </td>
           <td class="align-middle text-center">
             <span>{{item?.quantity}}</span>
-<!--            <div class="d-flex align-items-center justify-content-center">-->
-<!--              <span class="me-2 text-xs font-weight-bold">100%</span>-->
-<!--              <div>-->
-<!--                <div class="progress">-->
-<!--                  <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0"-->
-<!--                       aria-valuemax="100" style="width: 100%;"></div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
+            <!--            <div class="d-flex align-items-center justify-content-center">-->
+            <!--              <span class="me-2 text-xs font-weight-bold">100%</span>-->
+            <!--              <div>-->
+            <!--                <div class="progress">-->
+            <!--                  <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0"-->
+            <!--                       aria-valuemax="100" style="width: 100%;"></div>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
           </td>
           <td>
             <span class="text-xs font-weight-bold">{{item?.cateGoryofPro}}</span>
@@ -105,7 +112,7 @@
           <td class="align-middle">
 
             <!--            <button mat-raised-button color="primary">Primary</button>-->
-            <button mat-stroked-button color="primary" class="ms-md-2 p-0" (click)="openEdit(item)" >
+            <button mat-stroked-button color="primary" class="ms-md-2 p-0" (click)="openEdit(item)">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-stroked-button (click)="onViewProduct(item?.id)" color="accent" class="ms-md-2">
@@ -286,6 +293,13 @@
         </tbody>
       </table>
     </div>
+    <nz-pagination nzShowSizeChanger [nzPageIndex]="1"
+                   [nzTotal]="totalElement"
+                   [nzPageSizeOptions]="[5, 10, 15]"
+                   (nzPageIndexChange)="changePage($event)"
+                   (nzPageSizeChange)="changeSize($event)"
+                   [nzPageSize]="5"
+    ></nz-pagination>
   </div>
 </div>
 <div class="row">
@@ -295,10 +309,10 @@
       <h1>Modal header</h1>
     </modal-header>
     <modal-content>
-      <app-product-form ></app-product-form>
+      <app-product-form></app-product-form>
     </modal-content>
-<!--    <modal-footer>-->
-<!--      <button class="btn btn-primary" (click)="closeModal()">close</button>-->
-<!--    </modal-footer>-->
+    <!--    <modal-footer>-->
+    <!--      <button class="btn btn-primary" (click)="closeModal()">close</button>-->
+    <!--    </modal-footer>-->
   </modal>
 </div>

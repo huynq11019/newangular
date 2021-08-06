@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OrderRoutingModule } from './order-routing.module';
 import {OrderlistComponent} from './orderlist/orderlist.component';
 import {OrderdetailComponent} from './orderdetail/orderdetail.component';
+import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {OrderdetailComponent} from './orderdetail/orderdetail.component';
   ],
   imports: [
     CommonModule,
-    OrderRoutingModule
+    OrderRoutingModule,
+    NzPaginationModule
   ]
 })
 export class OrderModule { }

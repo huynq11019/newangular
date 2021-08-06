@@ -9,6 +9,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {ModalModule} from 'ngb-modal';
 import {ProductFormComponent} from './product-form/product-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import {NzIconModule} from 'ng-zorro-antd/icon';
+import {NzPopoverModule} from 'ng-zorro-antd/popover';
+import {NzPaginationModule} from 'ng-zorro-antd/pagination';
+// import { NzButtonModule } from 'ng-zorro-antd/button';
+// import {NzButtonModule} from 'ng-zorro-antd/button';
 
 
 @NgModule({
@@ -23,6 +29,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ModalModule,
     FormsModule,
     ReactiveFormsModule,
+    NzButtonModule,
+    NzIconModule,
+    NzPopoverModule,
+    NzPaginationModule
 
   ],
   providers: [NgbActiveModal]

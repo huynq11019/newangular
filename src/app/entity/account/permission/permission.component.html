@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Username</th>
+    <th scope="col" class="text-center" *ngFor="let item of listAuthro">{{item.name}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of listUser ; index as i">
+    <th scope="row">{{i}}</th>
+    <td>{{item?.fullName}}</td>
+    <td *ngFor="let role of listAuthro " class="text-center">
+<!--      <input type="checkbox" (change)="authrority_change(item, role)" [checked]="authrority_of(item,role) ">-->
+      <!--      <nz-checkbox-group  (ngModelChange)="authrority_change(item, role)"></nz-checkbox-group>-->
+      <label nz-checkbox [ngModel]="authrority_of(item,role)"
+             (ngModelChange)="authrority_change(item, role)"></label>
+    </td>
+
+  </tr>
+
+  </tbody>
+</table>

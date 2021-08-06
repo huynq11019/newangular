@@ -17,9 +17,6 @@ export class UploadfileServiceService {
   loadFile(formData: FormData): Observable<any> {
 
     console.log(formData);
-    // formData.enctype = 'multipart/form-data';
-    // formData.append('attachment', file);
-    // formData.enctype = 'multipart/form-data';
     return this.http.post(fileAPI.uploadFile, formData, {
       observe: 'response',
       // headers: {'Content-Type': 'multipart/form-data', }

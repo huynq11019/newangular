@@ -1,12 +1,148 @@
-<div class="row">
+<!--<div class="row">-->
 
-  <div class=" col-xs-0 col-md-2 ">
-    <app-sidebar></app-sidebar>
-  </div>
-  <div class="col-md-10">
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  </div>
+<!--  <div class=" col-xs-0 col-md-2 ">-->
+<!--    <app-sidebar></app-sidebar>-->
+<!--  </div>-->
+<!--  <div class="col-md-10">-->
+<!--    <app-header></app-header>-->
+<!--    <router-outlet></router-outlet>-->
+<!--  </div>-->
 
 
-</div>
+<!--</div>-->
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="http://localhost:8099/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>SHoppHuy</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/report">Report</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/produx">Product</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/order">Bill</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Account" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouterExact >
+            <a routerLink="/account">List Account </a>
+          </li><li nz-menu-item  nzMatchRouterExact >
+            <a routerLink="/account/permission" >Phân quyền </a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen routerLink="/auth/login" nzTitle="Logout" nzIcon="logout">
+    </ul>
+  </nz-sider>
+
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i class="trigger"
+               nz-icon
+               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+        </span>
+
+<!--        <li class="nav-item dropdown pe-2 d-flex align-items-center">-->
+          <a href="javascript:;" id="dropdownMenuButton" class="float-end pe-5" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="box" [style.border-radius]="100 | nzToCssUnit: '%'">NH</div>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+            <li class="mb-2">
+              <a class="dropdown-item border-radius-md" href="javascript:;">
+                <div class="d-flex py-1">
+                  <div class="my-auto">
+                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                  </div>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="text-sm font-weight-normal mb-1">
+                      <span class="font-weight-bold">New message</span> from Laur
+                    </h6>
+                    <p class="text-xs text-secondary mb-0">
+                      <i class="fa fa-clock me-1" aria-hidden="true"></i>
+                      13 minutes ago
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="mb-2">
+              <a class="dropdown-item border-radius-md" href="javascript:;">
+                <div class="d-flex py-1">
+                  <div class="my-auto">
+                    <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                  </div>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="text-sm font-weight-normal mb-1">
+                      <span class="font-weight-bold">New album</span> by Travis Scott
+                    </h6>
+                    <p class="text-xs text-secondary mb-0">
+                      <i class="fa fa-clock me-1" aria-hidden="true"></i>
+                      1 day
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item border-radius-md" href="javascript:;">
+                <div class="d-flex py-1">
+                  <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                    <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <title>credit-card</title>
+                      <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Rounded-Icons" transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                          <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
+                            <g id="credit-card" transform="translate(453.000000, 454.000000)">
+                              <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" id="Path" opacity="0.593633743"></path>
+                              <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z" id="Shape"></path>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="text-sm font-weight-normal mb-1">
+                      Payment successfully completed
+                    </h6>
+                    <p class="text-xs text-secondary mb-0">
+                      <i class="fa fa-clock me-1" aria-hidden="true"></i>
+                      2 days
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+<!--        </li>-->
+
+
+      </div>
+    </nz-header>
+
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

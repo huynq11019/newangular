@@ -28,3 +28,7 @@ td > label {
   width: 60px;
 
 }
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
