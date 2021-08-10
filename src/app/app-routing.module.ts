@@ -6,6 +6,7 @@ import {AuthLayoutComponent} from './layout/app-layout/auth-layout/auth-layout.c
 import {ReportComponent} from './entity/report/report.component';
 import {AuthenicatedGuard} from './core/interceptor/authenicated.guard';
 import {MainLayoutComponent} from './layout/app-layout/main-layout/main-layout.component';
+import {RegiterComponent} from './authen/regiter/regiter.component';
 
 const routes: Routes = [
   {// đây là main layout
@@ -42,6 +43,10 @@ const routes: Routes = [
   }, {
     path: 'fnckshit',
     loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)
+  },
+  {
+    path: 'register',
+    component: RegiterComponent
   }
   , {
     path: '**',

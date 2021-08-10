@@ -3,6 +3,7 @@ export const authAPi = {
   loigin: rootUrl + '/api/authenticate',
   getUserInfor: rootUrl + '/api/account/getinfor',
   getAll: rootUrl + '/api/admin/account/getlist',
+  getPage: rootUrl + '/api/admin/account/getPage',
   updateAccount: rootUrl + '/api/admin/account/update',
   regiter: rootUrl + '/api/register'
 };

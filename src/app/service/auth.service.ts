@@ -75,6 +75,11 @@ export class AuthService {
     return this.http.get(authAPi.getAll, {params: newParam});
   }
 
+  loadPage(param: any): Observable<any> {
+    const newPatam = new HttpParams({fromObject: param});
+    return this.http.get(authAPi.getPage, {params: param, observe: 'response'});
+  }
+
   isAuthenticae(): boolean {
     const jwt = this.$localSorge.retrieve(LOCAL_STORAGE.JWT_TOKEN) || this.$session.retrieve(LOCAL_STORAGE.JWT_TOKEN);
     return this.authenticated;
@@ -83,6 +88,10 @@ export class AuthService {
   authen(identity: any): void {
     this.userIdentity = identity;
     this.authenticated = identity !== null;
+  }
+
+  public register(account: Account): Observable<any> {
+    return this.http.post(authAPi.regiter, account, {observe: 'response'});
   }
 
   public logout(userId: number) {
@@ -114,8 +123,8 @@ export class AuthService {
     if (error.error instanceof ErrorEvent) {
       console.error('Có một lỗi ở đây', error.error.message);
     } else {
-      //he back end return unsuccessful response code
-      //the response bodymy contain clues as to what  went wrong
+      // he back end return unsuccessful response code
+      // the response bodymy contain clues as to what  went wrong
       console.log(`back end return turn code4${error.status}` + `body was: ${error.error}`);
     }
     return throwError('Some thing  bad happed: pleace try agin later');

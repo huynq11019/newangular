@@ -7,108 +7,87 @@
       <input type="submit" name="" value="Login"/><br/>
     </div>
     <div class="col-md-9 register-right">
-<!--      <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>-->
-<!--        </li>-->
-<!--      </ul>-->
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <h3 class="register-heading">Apply as a Employee</h3>
-          <div class="row register-form">
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="First Name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
-              </div>
-              <div class="form-group">
-                <div class="maxl">
-                  <label class="radio inline">
-                    <input type="radio" name="gender" value="male" checked>
-                    <span> Male </span>
-                  </label>
-                  <label class="radio inline">
-                    <input type="radio" name="gender" value="female">
-                    <span>Female </span>
-                  </label>
+      <form [formGroup]="formM" (ngSubmit)="onRegister()">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <h3 class="register-heading">Apply as a Employee</h3>
+            <div class="row register-form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="full Name *" value="" formControlName="fullName" />
+<!--                  {{formM.get('fullName')?.errors|json}}-->
+                  <div *ngIf="formM.get('fullName')?.invalid && (formM.get('userName')?.dirty || formM.get('fullName')?.touched)" class="text-danger">
+                    <small *ngIf="formM.getError('required','fullName')"> fullName  không được để trống</small>
+                    <small *ngIf="formM.getError('minlength','fullName')"> fullName tối thiểu 10 ký tự!</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="date" class="form-control" title="date of Brith"  formControlName="dob" />
+                  <div *ngIf="formM.get('dob')?.invalid && (formM.get('dob')?.dirty || formM.get('dob')?.touched)" class="text-danger">
+                    <small *ngIf="formM.getError('required','dob')"> ngày sinh không thể để sống</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Password *" formControlName="password" />
+                  <div *ngIf="formM.get('password')?.invalid && (formM.get('password')?.dirty || formM.get('password')?.touched)" class="text-danger">
+                    <small *ngIf="formM.getError('required','password')"> password không được để trống</small>
+                    <small *ngIf="formM.getError('minlength','password')"> password tối thiểu 5 ký tự!</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control"  placeholder="Confirm Password *" formControlName="passwordConfirm" />
+                  <div *ngIf="formM.get('passwordConfirm')?.invalid && (formM.get('passwordConfirm')?.dirty || formM.get('passwordConfirm')?.touched)" class="text-danger">
+                    <small *ngIf="formM.getError('required','passwordConfirm')"> password confirm không được để trống</small>
+                    <small *ngIf="formM.getError('minlength','passwordConfirm')">  password confirm thiểu 10 ký tự!</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <!--                <div class="maxl">-->
+                  <!--                  <label class="radio inline">-->
+                  <!--                    <input type="radio" name="gender" value="male" checked>-->
+                  <!--                    <span> Male </span>-->
+                  <!--                  </label>-->
+                  <!--                  <label class="radio inline">-->
+                  <!--                    <input type="radio" name="gender" value="female">-->
+                  <!--                    <span>Female </span>-->
+                  <!--                  </label>-->
+                  <!--                </div>-->
                 </div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Your Email *" value="" />
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Your Email *" formControlName="email"/>
+                  <div *ngIf="formM.get('email')?.invalid && (formM.get('email')?.dirty || formM.get('email')?.touched)" class="text-danger">
+                    <small *ngIf="formM.getError('required','email')"> email không được để trống</small>
+                    <small *ngIf="formM.getError('email','email')">  email khong đúng định dạng!</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" minlength="10" maxlength="15" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" formControlName="phoneNumber" />
+                  <div *ngIf="formM.get('phoneNumber')?.invalid && (formM.get('phoneNumber')?.dirty || formM.get('phoneNumber')?.touched)" class="text-danger">
+                    <small *ngIf="formM.getError('required','phoneNumber')"> phoneNumber  không được để trống</small>
+                    <small *ngIf="formM.getError('minlength','phoneNumber')"> phoneNumber tối thiểu 9 ký tự!</small>
+                    <small *ngIf="formM.getError('maxlength','phoneNumber')"> phoneNumber tối thiểu 15 ký tự!</small>
+                  </div>
+                </div>
+                <!--              <div class="form-group">-->
+                <!--                <select class="form-control">-->
+                <!--                  <option class="hidden"  selected disabled>Please select your Sequrity Question</option>-->
+                <!--                  <option>What is your Birthdate?</option>-->
+                <!--                  <option>What is Your old Phone Number</option>-->
+                <!--                  <option>What is your Pet Name?</option>-->
+                <!--                </select>-->
+                <!--              </div>-->
+                <!--              <div class="form-group">-->
+                <!--                <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />-->
+                <!--              </div>-->
+                <input type="submit" class="btnRegister"   value="Register"/>
               </div>
-              <div class="form-group">
-                <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
-              </div>
-              <div class="form-group">
-                <select class="form-control">
-                  <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
-                  <option>What is your Birthdate?</option>
-                  <option>What is Your old Phone Number</option>
-                  <option>What is your Pet Name?</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
-              </div>
-              <input type="submit" class="btnRegister"  value="Register"/>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <h3  class="register-heading">Apply as a Hirer</h3>
-          <div class="row register-form">
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="First Name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Phone *" value="" />
-              </div>
-
-
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
-              </div>
-              <div class="form-group">
-                <select class="form-control">
-                  <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
-                  <option>What is your Birthdate?</option>
-                  <option>What is Your old Phone Number</option>
-                  <option>What is your Pet Name?</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="`Answer *" value="" />
-              </div>
-              <input type="submit" class="btnRegister"  value="Register"/>
             </div>
           </div>
+
         </div>
-      </div>
+      </form>
     </div>
   </div>
 

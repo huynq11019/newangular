@@ -74,7 +74,7 @@ export class PermissionComponent implements OnInit {
     this.permissionService.updatePermistion(account).subscribe(
       respon => {
         // console.log(respon);
-        this.toasr.success('revoke permission ', respon.statusText);
+        this.toasr.warning('revoke permission ', respon.statusText);
 
       },
       error => console.error(error)
