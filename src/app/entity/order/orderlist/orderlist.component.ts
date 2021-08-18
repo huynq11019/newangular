@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {OrderService} from '../../../service/order.service';
+import {ToastrService} from 'ngx-toastr';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-orderlist',
@@ -6,8 +9,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./orderlist.component.css']
 })
 export class OrderlistComponent implements OnInit {
+  public orderPage: any;
+  private orderBystt = false;
 
-  constructor() {
+  constructor(private orderList: OrderService,
+              private toasr: ToastrService) {
   }
 
   private queryParam = {
@@ -17,14 +23,42 @@ export class OrderlistComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.loadAll();
   }
 
-  changePage(event: any): void {
-    console.log(event);
+  loadAll(): void {
+    this.orderPage = this.orderList.loadPage(this.queryParam).subscribe(
+      respon => {
+        console.log(respon);
+        this.orderPage = respon.body;
+      },
+      err => {
+        console.log(err);
+        this.toasr.error('lỗi load list order');
+      }
+    );
+  }
+
+  changePage(event: any, pro: string): void {
+    // console.log(event);
     // lấy size
     // lấy page index
-    //load
+    this.queryParam = {...this.queryParam, [pro]: event};
+    // load
+    console.log(this.queryParam);
   }
 
-  //tìm kiếm
+  sortTable(sortBy: string): void {
+    console.log('sort table');
+    if (this.orderBystt) {
+      // DESC
+      this.orderPage.content = _.orderBy(this.orderPage.content, [sortBy], ['desc']);
+
+    } else {
+      // ASC
+      this.orderPage.content = _.orderBy(this.orderPage.content, [sortBy], ['asc']);
+    }
+
+    this.orderBystt = !this.orderBystt;
+  }
 }

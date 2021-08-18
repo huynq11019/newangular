@@ -204,4 +204,23 @@ export class QuanlysanphamComponent implements OnInit {
 
     this.loadAllProduct();
   }
+
+  searchKey(): void {
+    if(this.param.keywoord === ''){
+      this.loadAllProduct();
+    }
+    // console.log(this.param);
+    const pattern = new RegExp(this.param.keywoord.toLowerCase());
+    // console.log(pattern);
+    const a = this.sanphamPage.content.filter((b: any) => {
+      // console.log(b.nameProduct);
+      // return b?.nameProduct.match(pattern);
+      console.log(pattern.test(b.nameProduct.toLowerCase()));
+      // console.log(b?.nameProduct.toLowerCase().includes(this.param.keywoord.toLowerCase()));
+      // return b?.nameProduct.toLowerCase().includes(this.param.keywoord.toLowerCase());
+      return pattern.test(b.nameProduct.toLowerCase());
+    });
+    // console.log(a);
+    this.sanphamPage.content = a;
+  }
 }

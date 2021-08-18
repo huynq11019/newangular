@@ -1,1 +1,100 @@
-<p>orderdetail works!</p>
+<div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">
+  <div class="text-uppercase">
+    <p>Order detail</p>
+  </div>
+  <div class="h4">{{orderDetail?.createdAt| date}}</div>
+  <div class="pt-1">
+    <p>Order #{{orderDetail.id}} is currently
+      <span class="badge rounded-pill bg-primary" *ngIf="orderDetail.status === 0">chờ xác nhận</span>
+      <span class="badge rounded-pill bg-info" *ngIf="orderDetail.status === 1">Đã xác nhận</span>
+      <span class="badge rounded-pill bg-info" *ngIf="orderDetail.status === 2">Đang giao</span>
+      <span class="badge rounded-pill bg-success" *ngIf="orderDetail.status === 3">Đã giao</span>
+      <span class="badge rounded-pill bg-danger" *ngIf="orderDetail.status === 4">Hủy</span>
+  </div>
+  <div class="btn close text-white"> &times;</div>
+</div>
+<div class="wrapper bg-white">
+  <div class="row border rounded p-1 my-3">
+    <!--    <div class="col-md-6 py-3">-->
+    <!--      <div class="d-flex flex-column align-items start"><b>Billing Address</b>-->
+    <!--        <p class="text-justify pt-2">James Thompson, 356 Jonathon Apt.220,</p>-->
+    <!--        <p class="text-justify">New York</p>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div class="col-md-6 py-3">
+      <div class="d-flex flex-column align-items start"><b>Thông tin người nhận</b>
+        <p class="text-justify pt-2">Tên người nhận : {{orderDetail.nguoinhan}}</p>
+        <p class="text-justify pt-2">Địa chỉ : {{orderDetail.address}}</p>
+        <p class="text-justify"> Liên Hệ :{{orderDetail.sdt}}</p>
+        <p class="text-justify">Phương thức thanh toán: <span
+          class="badge rounded-pill bg-danger">{{orderDetail.paymethod}}</span></p>
+      </div>
+    </div>
+    <div class="col-md-4 py-3">
+      <div class="row"><b>OPTION</b>
+        <div class="col-6"> Action</div>
+        <div class="col-6">
+          <nz-select [(ngModel)]="orderDetail.status">
+            <nz-option *ngFor="let option of listOfOption2" [nzLabel]="option.label" [nzValue]="option.val"></nz-option>
+            <nz-option nzLabel="chờ xác nhận" [nzValue]="0" nzHide></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col center-met">
+          lưu lại nhé
+        </div>
+        <div class="col">
+          <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="onSaveOrder()">save<i nz-icon nzType="download"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-borderless">
+    <thead>
+    <tr class="text-uppercase text-muted">
+      <th style="width: 40px"> STT</th>
+      <th scope="col"> Chi Tiết Đặt Hàng</th>
+      <th scope="col" class="text-right">total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of orderDetail.orderDetail; index as i">
+      <td>{{i}}</td>
+      <td scope="row">
+        <div class="d-flex justify-content-start align-items-center list py-1">
+          <div><b>x{{item.quantity}}</b></div>
+          <div class="mx-3"><img
+            [src]="'http://localhost:8099/api/file/img/'+item?.fromProduct.image"
+            alt="apple" class="rounded-circle" width="30" height="30"></div>
+          <div class="order-item">{{item.fromProduct.nameProduct}}</div>
+        </div>
+      </td>
+      <td class="text-right"><b>${{item.price}}</b></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="pt-2 border-bottom mb-3"></div>
+  <div class="d-flex justify-content-start align-items-center pl-3">
+    <div class="text-muted">Payment Method</div>
+    <div class="ml-auto">
+      <button class="text-white btn">{{orderDetail.paymethod}}</button>
+    </div>
+  </div>
+  <div class="d-flex justify-content-start align-items-center py-1 pl-3">
+    <div class="text-muted">Shipping</div>
+    <div class="ml-auto"><label>$10</label></div>
+  </div>
+  <div class="d-flex justify-content-start align-items-center pb-4 pl-3 border-bottom">
+<!--    <div class="text-muted">-->
+<!--      <button class="text-white btn">50% Discount</button>-->
+<!--    </div>-->
+<!--    <div class="ml-auto price"> -$34.94</div>-->
+  </div>
+  <div class="d-flex justify-content-start align-items-center pl-3 py-3 mb-4 border-bottom">
+    <div class="text-muted"> Today's Total</div>
+    <div class="ml-auto h5"> {{orderDetail.orderDetail| sumPriceorder | number}}</div>
+  </div>
+</div>

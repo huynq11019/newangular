@@ -1,306 +1,138 @@
+<div class="row">
+  <div class="col-3  pe-5"></div>
+  <div class="d-flex justify-content-end col-12">
 
-  <div class="row">
-    <div class="col-3  pe-5"></div>
-    <div class="d-flex justify-content-end col-12">
-      <!--      <button class="btn btn-outline-success me-2 btn-new "  (click)="openNew()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">-->
-      <!--        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>-->
-      <!--        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>-->
-      <!--      </svg></button>-->
-      <nz-button-group [nzSize]="size">
-        <button nz-button nzType="primary" nz-popover nzType="primary" nzPopoverContent="Tạo Sản phẩm"
-                nzPopoverPlacement="bottomLeft" (click)="openNew()">
-          <!--          <i nz-icon nzType="cloud"></i>-->
-          <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
-        </button>
-        <button nz-button nzType="danger" nz-popover nzPopoverContent="xóa sản phẩm" nzPopoverPlacement="bottomRight">
-          <!--          <i nz-icon nzType="cloud"></i>-->
-          <!--        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>-->
-          <i nz-icon nzType="delete" nzTheme="outline"></i>
-        </button>
-      </nz-button-group>
-    </div>
+    <input type="text" class="form-control w-30 me-md-3" placeholder="Enter Keyword..." [(ngModel)]="param.keywoord"
+           (keyup.enter)="searchKey()">
+    <nz-button-group [nzSize]="size">
+      <button nz-button nzType="primary" nz-popover nzType="primary" nzPopoverContent="Tạo Sản phẩm"
+              nzPopoverPlacement="bottomLeft" (click)="openNew()">
+        <!--          <i nz-icon nzType="cloud"></i>-->
+        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+      </button>
+      <button nz-button nzType="danger" nz-popover nzPopoverContent="xóa sản phẩm" nzPopoverPlacement="bottomRight">
+        <!--          <i nz-icon nzType="cloud"></i>-->
+        <!--        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>-->
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      </button>
+    </nz-button-group>
   </div>
-  <div class="card-body px-0 pt-0 pb-2">
-    <div class="table-responsive p-0">
-      <table class="table align-items-center justify-content-center mb-0">
-        <thead>
-        <tr>
-          <th class="text-uppercase text-secondary text-xl font-weight-bolder opacity-7 p-3">
-            <label for="checkAll">
-              <input id="checkAll" type="checkbox">
-            </label>
+</div>
+<div class="card-body px-0 pt-0 pb-2">
+    <table class="table align-items-center justify-content-center mb-0">
+      <thead>
+      <tr>
+        <th class="text-uppercase text-secondary text-xl font-weight-bolder opacity-7 p-3">
+          <label for="checkAll">
+            <input id="checkAll" type="checkbox">
+          </label>
 
-          </th>
-          <th class="text-uppercase text-primary text-xl font-weight-bolder opacity-7 ps-2"
-              (click)="sortTable('nameProduct')"> Product
-          </th>
-          <th class="text-uppercase text-danger text-xl font-weight-bolder opacity-7 ps-2"
-              (click)="sortTable('realPrice')">Price
-          </th>
-          <th class="text-uppercase text-info text-xl font-weight-bolder opacity-7 ps-2"
-              (click)="sortTable('deleteAt')">Status
-          </th>
-          <th class="text-uppercase text-warning text-xl font-weight-bolder text-center opacity-7 ps-2"
-              (click)="sortTable('quantity')">quantity
-          </th>
-          <th class="text-uppercase text-primary text-xl font-weight-bolder text-center opacity-7 ps-2"
-              (click)="sortTable('cateGoryofPro')">Category
-          </th>
-          <th class="text-uppercase text-danger text-xl font-weight-bolder text-center opacity-7 ps-2"
-              (click)="sortTable('lastUpdated')">last Update
-          </th>
+        </th>
+        <th class="text-uppercase text-primary text-xl font-weight-bolder opacity-7 ps-2"
+            (click)="sortTable('nameProduct')"> Product
+        </th>
+        <th class="text-uppercase text-danger text-xl font-weight-bolder opacity-7 ps-2"
+            (click)="sortTable('realPrice')">Price
+        </th>
+        <th class="text-uppercase text-info text-xl font-weight-bolder opacity-7 ps-2"
+            (click)="sortTable('deleteAt')">Status
+        </th>
+        <th class="text-uppercase text-warning text-xl font-weight-bolder text-center opacity-7 ps-2"
+            (click)="sortTable('quantity')">quantity
+        </th>
+        <th class="text-uppercase text-primary text-xl font-weight-bolder text-center opacity-7 ps-2"
+            (click)="sortTable('cateGoryofPro')">Category
+        </th>
+        <th class="text-uppercase text-danger text-xl font-weight-bolder text-center opacity-7 ps-2"
+            (click)="sortTable('lastUpdated')">last Update
+        </th>
 
-          <th class="text-uppercase text-dark text-lg font-weight-bolder text-center opacity-7 ps-2">Action</th>
+        <th class="text-uppercase text-dark text-lg font-weight-bolder text-center opacity-7 ps-2">Action</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of sanphamPage?.content, index as i">
-          <td class="p-0">
-            <label class="ms-0 ps-3">
-              <input type="checkbox" class="">
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of sanphamPage?.content, index as i">
+        <td class="p-0">
+          <label class="ms-0 ps-3">
+            <input type="checkbox" class="">
 
-            </label>
-          </td>
-          <td class="p-0">
+          </label>
+        </td>
+        <td class="p-0">
 
-            <div class="d-flex px-2">
-              <div>
-                <img
-                  [src]="item?.image ?  'http://localhost:8099/api/file/img/'+item?.image : 'https://www.playzone.vn/image/cache/no_image-100x100.png' "
-                  class="avatar avatar-sm rounded-circle me-2">
-              </div>
-              <div class="my-auto">
-                <h6 class="mb-0 text-sm">{{item?.nameProduct}}</h6>
-              </div>
+          <div class="d-flex px-2">
+            <div>
+              <img
+                [src]="item?.image ?  'http://localhost:8099/api/file/img/'+item?.image : 'https://www.playzone.vn/image/cache/no_image-100x100.png' "
+                class="avatar avatar-sm rounded-circle me-2">
             </div>
-          </td>
-          <td>
-            <p class="text-sm font-weight-bold mb-0">$
-              <del>{{item.realPrice|number}}</del>
-              <span class="text-danger">-{{item?.discount}}%</span></p>
-            <p>${{(item?.realPrice) - (item?.realPrice * item?.discount) / 100|number }}</p>
-          </td>
-          <td>
-
-            <div *ngIf="!item?.deleteAt; else offBlock">
-              <span class="badge badge-sm bg-gradient-success"> On</span>
+            <div class="my-auto">
+              <h6 class="mb-0 text-sm">{{item?.nameProduct}}</h6>
             </div>
-            <ng-template #offBlock>
-              <span class="badge badge-sm bg-gradient-faded-danger"> Off</span>
-            </ng-template>
-          </td>
-          <td class="align-middle text-center">
-            <span>{{item?.quantity}}</span>
-            <!--            <div class="d-flex align-items-center justify-content-center">-->
-            <!--              <span class="me-2 text-xs font-weight-bold">100%</span>-->
-            <!--              <div>-->
-            <!--                <div class="progress">-->
-            <!--                  <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0"-->
-            <!--                       aria-valuemax="100" style="width: 100%;"></div>-->
-            <!--                </div>-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </td>
-          <td>
-            <span class="text-xs font-weight-bold">{{item?.cateGoryofPro}}</span>
-          </td>
-          <td>
+          </div>
+        </td>
+        <td>
+          <p class="text-sm font-weight-bold mb-0">$
+            <del>{{item.realPrice|number}}</del>
+            <span class="text-danger">-{{item?.discount}}%</span></p>
+          <p>${{(item?.realPrice) - (item?.realPrice * item?.discount) / 100|number }}</p>
+        </td>
+        <td>
+
+          <div *ngIf="!item?.deleteAt; else offBlock">
+            <span class="badge badge-sm bg-gradient-success"> On</span>
+          </div>
+          <ng-template #offBlock>
+            <span class="badge badge-sm bg-gradient-faded-danger"> Off</span>
+          </ng-template>
+        </td>
+        <td class="align-middle text-center">
+          <span>{{item?.quantity}}</span>
+          <!--            <div class="d-flex align-items-center justify-content-center">-->
+          <!--              <span class="me-2 text-xs font-weight-bold">100%</span>-->
+          <!--              <div>-->
+          <!--                <div class="progress">-->
+          <!--                  <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0"-->
+          <!--                       aria-valuemax="100" style="width: 100%;"></div>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </div>-->
+        </td>
+        <td>
+          <span class="text-xs font-weight-bold">{{item?.cateGoryofPro}}</span>
+        </td>
+        <td>
             <span class="text-xs font-weight-bold">{{item?.lastUpdated | amLocal | amDateFormat: 'YYYY-MM-DD mm:ss'}}
-              <p>By <b class="text-danger">{{item?.updatedBy ? item?.updatedBy : 'no One'}}</b></p></span>
-          </td>
-          <td class="align-middle">
+              <p>By <b class="text-danger">{{item?.updatedBy ? item?.createByName : 'no One'}}</b></p></span>
+        </td>
+        <td class="align-middle">
 
-            <!--            <button mat-raised-button color="primary">Primary</button>-->
-            <button mat-stroked-button color="primary" class="ms-md-2 p-0" (click)="openEdit(item)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-stroked-button (click)="onViewProduct(item?.id)" color="accent" class="ms-md-2">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-stroked-button color="warn" class="ms-md-2" (click)="onRemveProduct(item?.id)">
-              <mat-icon>deleteforever</mat-icon>
-            </button>
-            <!--            <mat-icon class="mat-icon-rtl-mirror" svgIcon="shopping_cart"></mat-icon>-->
-          </td>
-        </tr>
+          <!--            <button mat-raised-button color="primary">Primary</button>-->
+          <button mat-stroked-button color="primary" class="ms-md-2 p-0" (click)="openEdit(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-stroked-button (click)="onViewProduct(item?.id)" color="accent" class="ms-md-2">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-stroked-button color="warn" class="ms-md-2" (click)="onRemveProduct(item?.id)">
+            <mat-icon>deleteforever</mat-icon>
+          </button>
+          <!--            <mat-icon class="mat-icon-rtl-mirror" svgIcon="shopping_cart"></mat-icon>-->
+        </td>
+      </tr>
 
-        <!--        <tr>-->
-        <!--          <td>-->
-        <!--            <div class="d-flex px-2">-->
-        <!--              <div>-->
-        <!--                <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2">-->
-        <!--              </div>-->
-        <!--              <div class="my-auto">-->
-        <!--                <h6 class="mb-0 text-sm">Invision</h6>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <p class="text-sm font-weight-bold mb-0">$5,000</p>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <span class="text-xs font-weight-bold">done</span>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle text-center">-->
-        <!--            <div class="d-flex align-items-center justify-content-center">-->
-        <!--              <span class="me-2 text-xs font-weight-bold">100%</span>-->
-        <!--              <div>-->
-        <!--                <div class="progress">-->
-        <!--                  <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle">-->
-        <!--            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">-->
-        <!--              <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>-->
-        <!--            </button>-->
-        <!--          </td>-->
-        <!--        </tr>-->
-        <!--        <tr>-->
-        <!--          <td>-->
-        <!--            <div class="d-flex px-2">-->
-        <!--              <div>-->
-        <!--                <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2">-->
-        <!--              </div>-->
-        <!--              <div class="my-auto">-->
-        <!--                <h6 class="mb-0 text-sm">Jira</h6>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <p class="text-sm font-weight-bold mb-0">$3,400</p>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <span class="text-xs font-weight-bold">canceled</span>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle text-center">-->
-        <!--            <div class="d-flex align-items-center justify-content-center">-->
-        <!--              <span class="me-2 text-xs font-weight-bold">30%</span>-->
-        <!--              <div>-->
-        <!--                <div class="progress">-->
-        <!--                  <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30" style="width: 30%;"></div>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle">-->
-        <!--            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">-->
-        <!--              <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>-->
-        <!--            </button>-->
-        <!--          </td>-->
-        <!--        </tr>-->
-        <!--        <tr>-->
-        <!--          <td>-->
-        <!--            <div class="d-flex px-2">-->
-        <!--              <div>-->
-        <!--                <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2">-->
-        <!--              </div>-->
-        <!--              <div class="my-auto">-->
-        <!--                <h6 class="mb-0 text-sm">Slack</h6>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <p class="text-sm font-weight-bold mb-0">$1,000</p>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <span class="text-xs font-weight-bold">canceled</span>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle text-center">-->
-        <!--            <div class="d-flex align-items-center justify-content-center">-->
-        <!--              <span class="me-2 text-xs font-weight-bold">0%</span>-->
-        <!--              <div>-->
-        <!--                <div class="progress">-->
-        <!--                  <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="width: 0%;"></div>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle">-->
-        <!--            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">-->
-        <!--              <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>-->
-        <!--            </button>-->
-        <!--          </td>-->
-        <!--        </tr>-->
-        <!--        <tr>-->
-        <!--          <td>-->
-        <!--            <div class="d-flex px-2">-->
-        <!--              <div>-->
-        <!--                <img src="../assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2">-->
-        <!--              </div>-->
-        <!--              <div class="my-auto">-->
-        <!--                <h6 class="mb-0 text-sm">Webdev</h6>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <p class="text-sm font-weight-bold mb-0">$14,000</p>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <span class="text-xs font-weight-bold">working</span>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle text-center">-->
-        <!--            <div class="d-flex align-items-center justify-content-center">-->
-        <!--              <span class="me-2 text-xs font-weight-bold">80%</span>-->
-        <!--              <div>-->
-        <!--                <div class="progress">-->
-        <!--                  <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80" style="width: 80%;"></div>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle">-->
-        <!--            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">-->
-        <!--              <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>-->
-        <!--            </button>-->
-        <!--          </td>-->
-        <!--        </tr>-->
-        <!--        <tr>-->
-        <!--          <td>-->
-        <!--            <div class="d-flex px-2">-->
-        <!--              <div>-->
-        <!--                <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2">-->
-        <!--              </div>-->
-        <!--              <div class="my-auto">-->
-        <!--                <h6 class="mb-0 text-sm">Adobe XD</h6>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <p class="text-sm font-weight-bold mb-0">$2,300</p>-->
-        <!--          </td>-->
-        <!--          <td>-->
-        <!--            <span class="text-xs font-weight-bold">done</span>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle text-center">-->
-        <!--            <div class="d-flex align-items-center justify-content-center">-->
-        <!--              <span class="me-2 text-xs font-weight-bold">100%</span>-->
-        <!--              <div>-->
-        <!--                <div class="progress">-->
-        <!--                  <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </td>-->
-        <!--          <td class="align-middle">-->
-        <!--            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">-->
-        <!--              <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>-->
-        <!--            </button>-->
-        <!--          </td>-->
-        <!--        </tr>-->
-        </tbody>
-      </table>
-    </div>
-    <nz-pagination nzShowSizeChanger [nzPageIndex]="1"
-                   [nzTotal]="totalElement"
-                   [nzPageSizeOptions]="[5, 10, 15]"
-                   (nzPageIndexChange)="changePage($event)"
-                   (nzPageSizeChange)="changeSize($event)"
-                   [nzPageSize]="5"
-    ></nz-pagination>
-  </div>
+
+      </tbody>
+    </table>
+  <nz-pagination nzShowSizeChanger [nzPageIndex]="1"
+                 [nzTotal]="totalElement"
+                 [nzPageSizeOptions]="[5, 10, 15]"
+                 (nzPageIndexChange)="changePage($event)"
+                 (nzPageSizeChange)="changeSize($event)"
+                 [nzPageSize]="5"
+  ></nz-pagination>
+</div>
 
 <div class="row">
   <!--  <button (click)="openModal()">open my modal</button>-->

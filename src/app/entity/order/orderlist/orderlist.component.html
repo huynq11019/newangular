@@ -1,111 +1,122 @@
 <!--<div class="col-lg-8 col-md-6 mb-md-0 mb-4">-->
-  <div class="card">
-    <div class="card-header pb-0">
-      <div class="row">
-        <div class="col-lg-6 col-7">
-          <h6>Projects</h6>
-          <p class="text-sm mb-0">
-            <i class="fa fa-check text-info" aria-hidden="true"></i> <span
-            class="font-weight-bold ms-1">30 done</span> this month
-          </p>
-        </div>
-        <div class="col-lg-6 col-5 my-auto text-end">
-          <div class="dropdown float-lg-end pe-4">
-            <a class="cursor-pointer" id="dropdownTable"
-               data-bs-toggle="dropdown" aria-expanded="false"> <i
-              class="fa fa-ellipsis-v text-secondary" aria-hidden="true"></i>
-            </a>
-            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
-                aria-labelledby="dropdownTable">
-              <li><a class="dropdown-item border-radius-md"
-                     href="javascript:;">Action</a></li>
-              <li><a class="dropdown-item border-radius-md"
-                     href="javascript:;">Another action</a></li>
-              <li><a class="dropdown-item border-radius-md"
-                     href="javascript:;">Something else here</a></li>
-            </ul>
-          </div>
-        </div>
+<div class="card">
+  <div class="card-header pb-0">
+    <div class="row">
+      <div class="col-lg-6 col-7">
+        <h6>Projects</h6>
+        <p class="text-sm mb-0">
+          <i class="fa fa-check text-info" aria-hidden="true"></i> <span
+          class="font-weight-bold ms-1">30 done</span> this month
+        </p>
       </div>
-    </div>
-    <div class="card-body px-0 pb-2">
-      <div class="table-responsive">
-        <table class="table align-items-center mb-0">
-          <thead>
-          <tr>
-            <th
-              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a
-              href="/admin/orders?sortby=id&order=${order }">Order ID</a></th>
-            <th
-              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a
-              href="/admin/orders?sortby=name&order=${order }">Customer</a></th>
-            <th
-              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><a
-              href="/admin/orders?sortby=id&order=${order }">Status</a></th>
-            <th
-              class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-              <a href="/admin/orders">total</a>
-            </th>
-            <th
-              class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-              <a href="/admin/orders?sortby=createDate&order=${order }">Added
-                date ID</a>
-            </th>
-            <th
-              class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-
-          <!--            <c:forEach var="item" items="${thisorder.content }">-->
-          <!--              <tr>-->
-          <!--                <td>-->
-          <!--                  <div class="d-flex px-2 py-1">${item.id }</div>-->
-          <!--                </td>-->
-          <!--                <td>-->
-          <!--                  <div class="d-flex px-2 py-1">-->
-          <!--                    <div>-->
-          <!--                      <img src="${item.account.photo }"-->
-          <!--                           class="avatar avatar-sm me-3">-->
-          <!--                    </div>-->
-          <!--                    <div class="d-flex flex-column justify-content-center">-->
-          <!--                      <h6 class="mb-0 text-sm">${item.account.fullname }</h6>-->
-          <!--                      <p class="text-xs text-secondary mb-0">${item.sdt }</p>-->
-          <!--                    </div>-->
-          <!--                  </div>-->
-          <!--                </td>-->
-          <!--                <td>-->
-          <!--                  <div class="avatar-group mt-2">-->
-          <!--											<span-->
-          <!--                        class="badge badge-sm bg-gradient-${item.loadtrangthai() ? 'danger':'success' } ">-->
-          <!--												${item.trangThai  }</span>-->
-          <!--                    &lt;!&ndash; secondary success  danger&ndash;&gt;-->
-          <!--                  </div>-->
-          <!--                </td>-->
-          <!--                <td class="align-middle text-center text-sm"><span-->
-          <!--                  class="text-xs font-weight-bold"> ${item.getTotal() } </span></td>-->
-          <!--                <td class="align-middle text-center">-->
-          <!--                  <div class="progress-wrapper w-75 mx-auto">${item.createDate }</div>-->
-          <!--                </td>-->
-          <!--                <td class="align-middle text-center">-->
-
-          <!--                  <a href="/admin/orders/${item.id }" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">-->
-          <!--                    View-->
-          <!--                  </a>-->
-          <!--              </tr>-->
-          <!--            </c:forEach>-->
-          </tbody>
-        </table>
-        <div class="container">
-          <nz-pagination  nzShowSizeChanger [nzPageIndex]="3"
-                          [nzTotal]="500"
-                          [nzPageSizeOptions]="[5, 10, 25, 100]"
-                          (nzPageIndexChange)="changePage($event)"
-                          (nzPageSizeChange)="changePage($event)"
-                          [nzPageSize]="10"></nz-pagination>
+      <div class="col-lg-6 col-5 my-auto text-end">
+        <div class="dropdown float-lg-end pe-4">
+          <a class="cursor-pointer" id="dropdownTable"
+             data-bs-toggle="dropdown" aria-expanded="false"> <i
+            class="fa fa-ellipsis-v text-secondary" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
+              aria-labelledby="dropdownTable">
+            <li><a class="dropdown-item border-radius-md"
+                   href="javascript:;">Action</a></li>
+            <li><a class="dropdown-item border-radius-md"
+                   href="javascript:;">Another action</a></li>
+            <li><a class="dropdown-item border-radius-md"
+                   href="javascript:;">Something else here</a></li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
+  <div class="card-body px-0 pb-2">
+    <div class="table-responsive">
+      <table class="table align-items-center mb-0">
+        <thead>
+        <tr>
+          <th style="width: 50px"
+              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" (click)="sortTable('id')">
+            Order ID
+          </th>
+          <th
+            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+            (click)="sortTable('nguoinhan')">Customer
+          </th>
+          <th
+            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+            (click)="sortTable('status')">Status
+          </th>
+          <th
+            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+            total
+          </th>
+          <th
+            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+            (click)="sortTable('createdAt')">
+            Added
+            date ID
+          </th>
+          <th
+            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let order of orderPage.content; index as i">
+          <td>
+            <div class="d-flex px-2 py-1">{{order.id}}</div>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <div>
+                <img src="../assets/img/team-2.jpg"
+                     class="avatar avatar-sm me-3">
+              </div>
+              <div class="d-flex flex-column justify-content-center">
+                <h6 class="mb-0 text-sm"> {{order.nguoinhan}} </h6>
+                <p class="text-xs text-secondary mb-0">{{order.sdt }}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="avatar-group mt-2">
+<!--          											<span-->
+<!--                                  class="badge badge-sm bg-gradient-success">-->
+<!--          												{{order.status}}-->
+                                  <span class="badge rounded-pill bg-primary" *ngIf="order.status === 0">chờ xác nhận</span>
+      <span class="badge rounded-pill bg-info" *ngIf="order.status === 1">Đã xác nhận</span>
+      <span class="badge rounded-pill bg-info" *ngIf="order.status === 2">Đang giao</span>
+      <span class="badge rounded-pill bg-success" *ngIf="order.status === 3">Đã giao</span>
+      <span class="badge rounded-pill bg-danger" *ngIf="order.status === 4">Hủy</span>
+              <!-- secondary success  danger-->
+            </div>
+          </td>
+          <td class="align-middle text-center text-sm"><span
+            class="text-xs font-weight-bold">$ {{order?.orderDetail | sumPriceorder | number}}  </span></td>
+          <td class="align-middle text-center">
+            <div class="progress-wrapper w-75 mx-auto">{{order.createdAt | date}}</div>
+          </td>
+          <td class="align-middle text-center">
+
+            <a [routerLink]="'/order/orderdetail/' + order.id" class="text-secondary font-weight-bold text-xs"
+               data-toggle="tooltip"
+               data-original-title="Edit user">
+              View
+            </a>
+
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="container">
+      <nz-pagination nzShowSizeChanger [nzPageIndex]="1"
+                     [nzTotal]="orderPage.totalElement"
+                     [nzPageSizeOptions]="[5, 10, 15, 25]"
+                     (nzPageIndexChange)="changePage($event, 'page')"
+                     (nzPageSizeChange)="changePage($event, 'limit')"
+                     [nzPageSize]="10"></nz-pagination>
+    </div>
+  </div>
+</div>
 <!--</div>-->

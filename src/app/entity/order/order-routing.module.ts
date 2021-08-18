@@ -9,7 +9,7 @@ const routes: Routes = [
     component: OrderlistComponent
   },
   {
-    path: 'detail',
+    path: 'orderdetail/:orderId',
     component: OrderdetailComponent
   }];
 

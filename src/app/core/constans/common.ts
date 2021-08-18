@@ -11,8 +11,8 @@ export const productApi = {
   getPage: rootUrl + '/api/products',
   getProduct: rootUrl + '/api/product/',  //+id sản phẩm
   createProduct: rootUrl + '/api/product',
-  deleteProduct: rootUrl + '/api/product/', //+id sản phẩm',
-  getListDeleted: rootUrl + '/api/deleted/product', ///lấy danh sách sản phẩm đã xóa
+  deleteProduct: rootUrl + '/api/product/', // +id sản phẩm',
+  getListDeleted: rootUrl + '/api/deleted/product', /// lấy danh sách sản phẩm đã xóa
   //TODO tạo get sản phẩm theo category
   getProductByCategory: rootUrl + '/api/{id}/prodcut',
   updateProduct: rootUrl + '/api/product/'
@@ -31,4 +31,15 @@ export const fileAPI = {
 export const authrorityAPI = {
   getAll: rootUrl + '/api/authrow',
   updatePermission: rootUrl + '/api/admin/account/setAuthrority'
+};
+
+export const orderAPI = {
+  getPage: rootUrl + '/api/admin/orders',
+  getOrderDetail: rootUrl + '/api/orderetail/',
+  updateStatus: rootUrl + '/api/orderstt/',
+
+};
+export const reportAPI = {
+  getReportCate: rootUrl + '/api/catereport',
+  getProductReport: rootUrl + '/api/productreport'
 };

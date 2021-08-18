@@ -40,6 +40,7 @@ registerLocaleData(en);
 import {MatIconModule} from '@angular/material/icon';
 import {NzPipesModule} from 'ng-zorro-antd/pipes';
 import {NzPaginationModule} from 'ng-zorro-antd/pagination';
+import {ReportComponent} from './entity/report/report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,35 +54,36 @@ import {NzPaginationModule} from 'ng-zorro-antd/pagination';
     RightSidebarComponent,
     AccountComponent,
     ConfirmModalComponent,
+    ReportComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        NgxSpinnerModule,
-        HttpClientModule,
-        ToastrModule.forRoot({
-            timeOut: 10000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: false,
-        }),
-        FormsModule,
-        NgxWebstorageModule.forRoot(),
-        NgbModule,
-        MomentModule,
-        MatProgressBarModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        // NzPaginationModule
-        // NzPopoverModule
-        //
-        MatIconModule,
-        NzPipesModule,
-        NzPaginationModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+    }),
+    FormsModule,
+    NgxWebstorageModule.forRoot(),
+    NgbModule,
+    MomentModule,
+    MatProgressBarModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    // NzPaginationModule
+    // NzPopoverModule
+    //
+    MatIconModule,
+    NzPipesModule,
+    NzPaginationModule,
 
 
-    ],
+  ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}, FormBuilder, { provide: NZ_I18N, useValue: en_US }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
